@@ -3,11 +3,19 @@
 #include<cuda.h>
 #include<time.h>
 
-struct graph
+class graph
 {
+public:
     int num_vertices, num_edges;
     int *depth;
     std::pair<int,int> *edgelist;
+
+    graph()
+    {
+        depth = (int*)malloc(10*sizeof(int));
+        // edgelist = (std::pair<int,int> *)malloc(10*sizeof(std::pair<int,int>));
+    }
+
 };
 
 void readgraph(graph &g, int argc, char **argv)
@@ -95,34 +103,52 @@ __global__ void bfs(graph &g, int start, int current_depth, bool *stop)
 
 }
 
-int main(int argc, char **argv)
+int main()
 {
     graph g;
-    int *start = (int*)argv[1];
+    /*int *start = (int*)argv[1];
     int l = 0;
 
     readgraph(g,argc,argv);
     initialize<<<1,g.num_vertices>>>(g,*start);
 
     printf("Number of vertices : %d\n",g.num_vertices);
-    printf("Number of edges : %d\n",g.num_edges);
+*///    printf("Number of edges : %d\n",g.num_edges);
 
-    graph *gg;
-    cudaMalloc(&gg,sizeof(g));
-    cudaMemcpy(gg,&g,sizeof(g),cudaMemcpyHostToDevice);
-
+    cudaError_t err = cudaSuccess;
+    g.num_vertices=5;
+    g.num_edges=4;
+    for(int i=0;i<5;i++)
+    {
+        int a = rand() % 5;
+        int b = rand() % 5;
+        g.edgelist[i] = std::make_pair(a,b);
+    }
+    int start =2;
+    int l=0;
     
-
+    graph *gg = NULL;
     printf("BFS of graph :\n");
-    bool done = false;
+    int* a =NULL;
+    err = cudaMalloc((void**)&a, sizeof(int));
+    if (err != cudaSuccess)
+    {
+        printf("failed to allocate mem error: %s",cudaGetErrorString(err)); }
+    printf("malloc last\n"); //     
     bool *stop;
     
-    cudaMalloc(&stop,sizeof(bool));
+    cudaMalloc((void**)&stop,sizeof(bool));
+    err = cudaMalloc((void**)&gg,sizeof(g));
+    if (err != cudaSuccess)
+    {
+        printf("failed to allocate mem error: %s",cudaGetErrorString(err)); }
+    cudaMemcpy(gg,&g,sizeof(g),cudaMemcpyHostToDevice);
     
+    bool done = false;
     while(!done)
     {
         done = true;
-        bfs<<<1,(*gg).num_edges>>>(*gg,*start,l,&done);
+        bfs<<<1,(*gg).num_edges>>>(*gg,start,l,&done);
         cudaMemcpy(&done,stop,sizeof(done),cudaMemcpyDeviceToHost);
         l++;
     }
