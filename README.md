@@ -1,7 +1,8 @@
 # bfs-cuda
 Implementation of parallel Breadth-first traversal algorithm in CUDA
 
-Usage:
+## Usage:
+```
 
 To run algorithms on random generated graphs:
 ./main <start vertex> <number of vertices> <number of edges>
@@ -13,5 +14,7 @@ Input should be in the form:
 <end of edge1> <end of edge1>
 <end of edge2> <end of edge2>
 ...
+
+```
 
 
