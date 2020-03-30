@@ -4,7 +4,7 @@ Implementation of parallel Breadth-first traversal algorithm in CUDA
 Usage:
 
 To run algorithms on random generated graphs:
-./main <start vertex> <number of vertices> <number of edges>
+./main<start vertex> <number of vertices> <number of edges>
 
 To run algorithm on graphs from standard input:
 ./main <start vertex> < input
