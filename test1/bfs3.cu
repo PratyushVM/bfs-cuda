@@ -7,7 +7,7 @@
 #define f first
 #define s second
 
-//declaration of class object
+//declaration of class object - graph
 
 class graph
 {
@@ -38,7 +38,7 @@ __global__ void init_depth_kernel(graph *g, int start)
 
 }
 
-//Kernel invoked in bfs routine
+//Kernel invoked in simple_bfs routine
 
 __global__ void bfs_kernel(graph *g, bool *done)
 {
@@ -63,9 +63,11 @@ __global__ void bfs_kernel(graph *g, bool *done)
         *done = false;
     }
 
+    //*done is used to determine if the bfs_kernel shoulb be invoked again by simple_bfs routine
+
 }
 
-//host function that invokes bfs_kernel iteratively 
+//host function for simple_bfs routine that invokes bfs_kernel iteratively 
 
 void simple_bfs(graph *cpu_g, graph *gpu_g, bool *cpu_done, bool *gpu_done)
 {
@@ -155,7 +157,7 @@ int main(int argc, char **argv)
     //invoking kernel to initialize the depth array of the graph 
     init_depth_kernel<<<1,nv>>>(gpu_g,start);
 
-    //declaration of bool variables in host for routine to invoke bfs kernel
+    //declaration of bool variables in host - used for routine to invoke bfs kernel
     bool *cpu_done;
     cpu_done = (bool*)malloc(sizeof(bool));
     *cpu_done = false;

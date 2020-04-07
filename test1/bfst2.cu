@@ -7,7 +7,7 @@
 #define f first
 #define s second
 
-//declaration of class object graph
+//declaration of class object
 class graph
 {
 public:
