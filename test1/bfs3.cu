@@ -100,6 +100,16 @@ void readgraph(pii *c_edgelist, int nv, int ne, int argc, char **argv)
     
 }
 
+//host function to print the depth of each vertex
+
+void printgraph(graph *cpu_g)
+{
+    for(int i=0;i<cpu_g->v;i++)
+    {
+        printf("The depth of vertex %d is %d\n",i,cpu_g->depth[i]);
+    }
+}
+
 //main function
 
 int main(int argc, char **argv)
@@ -167,9 +177,8 @@ int main(int argc, char **argv)
     cpu_g->depth = c_depth;
 
     //printing depth of vertices from host memory
-    for(int i=0;i<nv;i++)
-    {
-        printf("The depth of vertex %d is %d\n",i,cpu_g->depth[i]);
-    }
+    printgraph(cpu_g);
+   
+    return 0;
 
 }
