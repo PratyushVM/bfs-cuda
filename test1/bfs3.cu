@@ -174,6 +174,7 @@ int main(int argc, char **argv)
     cudaMemcpy(c_depth,g_depth,nv*sizeof(int),cudaMemcpyDeviceToHost);
     cudaMemcpy(c_edgelist,g_edgelist,ne*sizeof(pii),cudaMemcpyDeviceToHost);
     cudaMemcpy(cpu_g,gpu_g,sizeof(graph),cudaMemcpyDeviceToHost);
+    
     cpu_g->edgelist = c_edgelist;
     cpu_g->depth = c_depth;
 
