@@ -1,5 +1,5 @@
-#include<stdio.h>
-#include<cuda.h>
+#include<stdio>
+#include<cuda>
 #include<utility>
 
 #define pii std::pair<int,int>
