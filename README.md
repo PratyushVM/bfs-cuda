@@ -1,20 +1,22 @@
 # bfs-cuda
-Implementation of parallel Breadth-first traversal algorithm in CUDA
+Implementation of simple parallel Breadth-first traversal algorithm in CUDA.
 
-## Usage:
+## Execution:
+```
+To build the project, run :
+make
+
+```
 ```
 
-To run algorithms on random generated graphs:
-./main <start vertex> <number of vertices> <number of edges>
-
-To run algorithm on graphs from standard input:
-./main <start vertex> < input
-Input should be in the form:
-<number of vertices> <number of edges>
-<end of edge1> <end of edge1>
-<end of edge2> <end of edge2>
+To run the algorithm on graphs from standard input:
+./bfs <number of vertices> <number of edges> <source vertex>
+<end of edge 1> <end of edge 1>
+<end of edge 2> <end of edge 2>
+<end of edge 3> <end of edge 3>
 ...
 
 ```
+
 
 
