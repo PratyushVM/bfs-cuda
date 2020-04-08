@@ -1,4 +1,4 @@
-#include"../include/graph.h"
+#include"../include/graph.cuh"
 
 //host function for simple_bfs routine that invokes bfs_kernel iteratively 
 

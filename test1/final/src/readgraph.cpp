@@ -1,4 +1,5 @@
 #include"../include/graph.h"
+#include<cstdlib>
 
 //host function that reads graph data from command line
 
