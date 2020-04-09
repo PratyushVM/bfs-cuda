@@ -11,9 +11,9 @@ make
 
 To run the algorithm on graphs from standard input:
 ./bfs <number of vertices> <number of edges> <source vertex>
+<end of edge 0> <end of edge 0>
 <end of edge 1> <end of edge 1>
 <end of edge 2> <end of edge 2>
-<end of edge 3> <end of edge 3>
 ...
 
 ```
