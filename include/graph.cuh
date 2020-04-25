@@ -7,7 +7,7 @@
 //function prototypes for kernels 
 
 __global__ void init_depth_kernel(graph *g, int start);
-__global__ void bfs_kernel(graph *g, bool *done);
+__global__ void bfs_kernel(graph *g, bool *done,int current_depth);
 
 #endif
 

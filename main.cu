@@ -90,6 +90,7 @@ int main(int argc, char **argv)
     fprintf(g,"%lf\n",time_taken); 
     printf("Execution time written in time.txt\n");
 
+    check(cpu_g,c_edgelist,start);
 
     //freeing memory allocated on GPU
     cudaFree(gpu_done);

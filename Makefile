@@ -3,8 +3,8 @@ NVCC = nvcc
 
 all : bfs
 
-bfs : obj/main.o obj/readgraph.o obj/printgraph.o obj/simple_bfs.o obj/init_depth.o obj/bfs_kernel.o
-	$(NVCC) obj/main.o obj/readgraph.o obj/printgraph.o obj/simple_bfs.o obj/init_depth.o obj/bfs_kernel.o -o bfs
+bfs : obj/main.o obj/readgraph.o obj/printgraph.o obj/simple_bfs.o obj/init_depth.o obj/bfs_kernel.o obj/check.o
+	$(NVCC) obj/main.o obj/readgraph.o obj/printgraph.o obj/simple_bfs.o obj/init_depth.o obj/bfs_kernel.o obj/check.o -o bfs
 
 obj/main.o : main.cu obj     
 	$(NVCC) -c main.cu -o obj/main.o 
@@ -23,6 +23,9 @@ obj/init_depth.o : src/init_depth.cu obj
 
 obj/bfs_kernel.o : src/bfs_kernel.cu obj
 	$(NVCC) -c src/bfs_kernel.cu -o obj/bfs_kernel.o
+
+obj/check.o : src/check.cpp obj
+	$(CC) -c src/check.cpp -o obj/check.o
 
 obj : 
 	mkdir obj

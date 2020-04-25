@@ -3,9 +3,15 @@
 
 #include<stdio.h>
 #include<utility>
+#include<list>
+#include<vector>
+#include<bits/stdc++.h>
 
 #define pii std::pair<int,int>
+#define list std::list
 #define mp std::make_pair
+#define pb push_back
+#define vector std::vector
 
 #define nthreads atoi(argv[2])
 #define threads_per_block 256
@@ -28,6 +34,7 @@ public:
 void simple_bfs(graph *cpu_g, graph *gpu_g, bool *cpu_done, bool *gpu_done, char **argv);
 void readgraph(pii *c_edgelist, int nv, int ne, int argc, char **argv);
 void printgraph(graph *cpu_g);
+void check(graph *cpu_g, pii *c_edgelist,int start);
 
 
 #endif
