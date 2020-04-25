@@ -1,6 +1,8 @@
 #include"include/graph.h"
 #include"include/graph.cuh"
+#include<bits/stdc++.h>
 //main function
+
 
 int main(int argc, char **argv)
 {
@@ -49,8 +51,12 @@ int main(int argc, char **argv)
     cudaMemcpy(&(gpu_g->edgelist),&g_edgelist,sizeof(pii *),cudaMemcpyHostToDevice);
     cudaMemcpy(&(gpu_g->depth),&g_depth,sizeof(int*),cudaMemcpyHostToDevice);
 
+    std::clock_t start_time,end_time;
+
+    start_time = std::clock();
+
     //invoking kernel to initialize the depth array of the graph 
-    init_depth_kernel<<<1,nv>>>(gpu_g,start);
+    init_depth_kernel<<<nblocks,threads_per_block>>>(gpu_g,start);
 
     //declaration of bool variables in host - used for routine to invoke bfs kernel
     bool *cpu_done;
@@ -63,7 +69,9 @@ int main(int argc, char **argv)
     cudaMemcpy(gpu_done,cpu_done,sizeof(bool),cudaMemcpyHostToDevice);
 
     //routine that invokes bfs kernel from host
-    simple_bfs(cpu_g,gpu_g,cpu_done,gpu_done);
+    simple_bfs(cpu_g,gpu_g,cpu_done,gpu_done,argv);
+
+    end_time = std::clock();
 
     //copying device data back into host memory
     cudaMemcpy(c_depth,g_depth,nv*sizeof(int),cudaMemcpyDeviceToHost);
@@ -75,6 +83,13 @@ int main(int argc, char **argv)
 
     //printing depth of vertices from host memory
     printgraph(cpu_g);
+
+    double time_taken = double(end_time - start_time) / double(CLOCKS_PER_SEC); 
+    
+    FILE *g = fopen("time.txt","w");
+    fprintf(g,"%lf\n",time_taken); 
+    printf("Execution time written in time.txt\n");
+
 
     //freeing memory allocated on GPU
     cudaFree(gpu_done);

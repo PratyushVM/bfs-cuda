@@ -1,23 +1,29 @@
 #include"../include/graph.h"
 #include<cstdlib>
+#include<bits/stdc++.h>
+#include<fstream>
+#include<sstream>
+
 
 //host function that reads graph data from command line
 
 void readgraph(pii *c_edgelist, int nv, int ne, int argc, char **argv)
 {
-    if(argc <= 4 || argc%2 != 0)
-    {
-        printf("Enter valid arguments in command line\n");
-        exit(0);
-    }
+     
+   FILE *fp = fopen("edgelist.txt","r");
 
-    else
-    {
-        int i,j;
-        for(i=0, j=4;j<argc-1;i++,j+=2)
-        {
-            c_edgelist[i] = mp(atoi(argv[j]),atoi(argv[j+1]));
-        }
-    }
-    
+   char buf1[10],buf2[10];
+
+   int i=0,e1,e2;
+
+   while(i<ne)
+   {
+       fscanf(fp,"%s",buf1);
+       fscanf(fp,"%s",buf2);
+       e1 = atoi(buf1);
+       e2 = atoi(buf2);
+       c_edgelist[i++] = mp(e1,e2); 
+       
+   }
+
 }

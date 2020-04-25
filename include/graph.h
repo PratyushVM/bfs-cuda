@@ -6,8 +6,10 @@
 
 #define pii std::pair<int,int>
 #define mp std::make_pair
-#define f first
-#define s second
+
+#define nthreads atoi(argv[2])
+#define threads_per_block 256
+#define nblocks nthreads/threads_per_block + 1
 
 //declaration of class object - graph
 
@@ -23,7 +25,7 @@ public:
 
 //function prototypes for host functions
 
-void simple_bfs(graph *cpu_g, graph *gpu_g, bool *cpu_done, bool *gpu_done);
+void simple_bfs(graph *cpu_g, graph *gpu_g, bool *cpu_done, bool *gpu_done, char **argv);
 void readgraph(pii *c_edgelist, int nv, int ne, int argc, char **argv);
 void printgraph(graph *cpu_g);
 
