@@ -82,7 +82,7 @@ int main(int argc, char **argv)
     cpu_g->depth = c_depth;
 
     //printing depth of vertices from host memory
-    printgraph(cpu_g);
+    //printgraph(cpu_g);
 
     double time_taken = double(end_time - start_time) / double(CLOCKS_PER_SEC); 
     
